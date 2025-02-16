@@ -23,9 +23,9 @@ app.use("/customer/auth/*", function auth(req, res, next) {
         let token = req.session.authorization['accessToken'];
 
         // Verify JWT token
-        jwt.verify(token, "access", (err, customer) => {
+        jwt.verify(token, "access", (err, username) => {
             if (!err) {
-                req.customer = customer;
+                req.username = username;
                 next();
             } else {
                 return res.status(403).json({ message: "Unauthorized customer access" });
